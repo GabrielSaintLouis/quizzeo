@@ -25,40 +25,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login</title>
-    <link rel="stylesheet" href="style.css">
 </head>
 <body>
-
-<header>
-    <nav>
-        <ul>
-            <?php
-            if (isset($_SESSION["type"])) {
-                if ($_SESSION['type'] === "entreprise"){
-                    echo '<li><a href="dashboard_business">Dashboard</a></li>';
-                    echo '<li><a href="logout.php">Déconnexion</a></li>';
-                }
-                else if ($_SESSION["type"] === "ecole"){
-                    echo '<li><a href="dashboard_school">Dashboard</a></li>';
-                    echo '<li><a href="logout.php">Déconnexion</a></li>';
-                }
-                else if ($_SESSION["type"] === "utilisateur") {
-                    echo '<li><a href="dashboard_pnj">Dashboard</a></li>';
-                    echo '<li><a href="logout.php">Déconnexion</a></li>';
-                }
-                else if ($_SESSION["type"] === "admin") {
-                    echo '<li><a href="dashboard_admin">Dashboard</a></li>';
-                    echo '<li><a href="logout.php">Déconnexion</a></li>';
-                }
-            } 
-            else {
-                echo '<li><a href="index.php">Connexion</a></li>';
-            }
-            ?>
-        </ul>
-    </nav>
-</header>
-
+<div class="container">
 <h1>Page de d'inscription</h1>
 <form action="inscription.php" method="post">
     <label for="type">Type: </label><br>
@@ -75,8 +44,90 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <label for="captcha">Êtes-vous un robot ?</label>
     <input type="checkbox" id="checkbox" name="checkbox" required>
     </button><br><br>
-    <button type="submit">S'inscrire</button><br>
+    <button type="submit" id = "inscription">S'inscrire</button><br><br> 
 </form>
+<p>Vous avez déjà un compte ? <a href="index.php">Connexion</a></p>
+</div>
 <?php include 'footer.php'; ?>
+
 </body>
+<style>
+    @import url('https://fonts.googleapis.com/css2?family=Anton&family=Roboto:wght@100;300;400;500&display=swap');
+
+body {
+    font-family: "Roboto", sans-serif;
+    padding: 150px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.container {
+    width: 500px;
+    text-align: center;
+    background-color: lightblue;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+footer {
+    bottom: 0px;
+    position: fixed;
+    width: 100%;
+    text-align: center;
+    height: 50px;
+    background-color: lightblue;
+}
+
+button {
+    background: white;
+    color: black;
+    width: 200px;
+    height: 50px;
+}
+#inscription {
+    width: 170px;
+    height: 50px;
+    font-family: "Anton", sans-serif;
+    font-size: 15px;
+    background: transparent;
+    border: 1px solid black;
+    border-radius: 50px;
+}
+header {
+        background-color: lightblue;
+        top: 0px;
+        position: fixed;
+        width: 100%;
+        text-align: center;
+    }
+
+
+label {
+    font-size: 18px;
+}
+
+select {
+    height: 25px;
+    width: 150px;
+    text-align: center;
+    border: 1px solid black;
+}
+
+form select {
+    background: transparent ;
+}
+
+a {
+    text-decoration: none;
+    color: black
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+</style>
 </html>
