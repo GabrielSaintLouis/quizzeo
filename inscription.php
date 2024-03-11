@@ -8,23 +8,19 @@
 </head>
 <body>
 <?php
-// Vérifie si le formulaire a été soumis
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    // Récupère les valeurs du formulaire
+
     $type = $_POST['type'];
     $email = $_POST['email'];
     $password = $_POST['password'];
     
-    // Formatte les données pour le CSV
     $userData = [$type, $email, $password];
-    $userDataString = implode(',', $userData) . PHP_EOL;
     
-    // Ouvre le fichier en mode append
-    $file = fopen('users.csv', 'a');
-    if ($file) {
-        // Écrit les données dans le fichier
-        fwrite($file, $userDataString);
-        // Ferme le fichier
+    $file = fopen('users.csv', 'w');
+    if ($file !== false) {
+ 
+        fputcsv($file, $userData);
+
         fclose($file);
     } else {
         echo "Erreur lors de l'ouverture du fichier.";
@@ -62,7 +58,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 </header>
 
     <h1>Page de d'inscription</h1>
-    <form action="header.php" method="post">
+    <form action="inscription.php" method="post">
         <label for="type">Type: </label><br>
         <select name="type" id="option_type" required>
             <option value="entreprise">Entreprise</option>
