@@ -35,6 +35,8 @@ if (isset($_SESSION["type"])) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login</title>
+    <script src="https://unpkg.com/boxicons@2.1.4/dist/boxicons.js"></script>
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
 </head>
 <body>
 
@@ -46,6 +48,7 @@ if (isset($_SESSION["type"])) {
                 header("Location: accueil.php");
             }
             ?>
+            <img src="quizzeo.png" alt="quizzeo">
         </ul>
     </nav>
 </header>
@@ -75,6 +78,27 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && !isset($_SESSION["type"])) {
 <style>
     @import url('https://fonts.googleapis.com/css2?family=Anton&family=Roboto:wght@100;300;400;500&display=swap');
 
+    header {
+        top: 0px;
+        position: fixed;
+        background-color: lightblue;
+        width: 100%;
+    }
+
+    nav ul {
+        list-style-type: none; 
+        margin: 0;
+        padding: 0;
+        display: flex;
+        justify-content: center; 
+        align-items: center; 
+    }
+
+    nav ul img {
+        width: auto;
+        height: 50px;
+    }
+
     body {
         font-family: "Roboto", sans-serif;
         padding: 150px;
@@ -87,7 +111,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && !isset($_SESSION["type"])) {
     .container {
         width: 500px;
         text-align: center;
-        background-color: lightblue;
+        border: 1px solid black;
         display: flex;
         flex-direction: column;
         align-items: center;
