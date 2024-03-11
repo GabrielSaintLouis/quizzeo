@@ -14,7 +14,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             if ($userData[1] == $email && $userData[2] == $password) {
                 // L'utilisateur existe, démarre la session et redirige vers le dashboard approprié
                 $_SESSION['type'] = $userData[0];
-                header('Location: dashboard.php');
+                header('Location: accueil.php');
                 exit;
             }
         }
@@ -22,6 +22,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     } else {
         echo "Erreur lors de l'ouverture du fichier.";
     }
+}
+if (isset($_SESSION["type"])) {
+    header('Location: accueil.php');
+    exit;
 }
 ?>
 
