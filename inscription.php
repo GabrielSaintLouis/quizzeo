@@ -22,7 +22,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         fputcsv($file, $userData);
 
         fclose($file);
-    } else {
+        header('Location: index.php');
+    } 
+    else {
         echo "Erreur lors de l'ouverture du fichier.";
     }
 }
