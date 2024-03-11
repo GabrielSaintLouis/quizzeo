@@ -42,7 +42,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     </nav>
 </header>
 <div class="container">
-<h1>Page de d'inscription</h1>
+<h1>Page d'inscription</h1>
 <form action="inscription.php" method="post">
     <label for="type">Type: </label><br>
     <select name="type" id="option_type" required>
@@ -54,11 +54,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <input type="email" id="email" name="email" required><br><br>
     <label for="password">Mot de passe :</label><br>
     <input type="password" id="password" name="password" required><br><br>
-    <button>
+    <button type="submit" id = "inscription">S'inscrire</button><br><br> 
+    <button id = "captcha">
     <label for="captcha">Êtes-vous un robot ?</label>
     <input type="checkbox" id="checkbox" name="checkbox" required>
-    </button><br><br>
-    <button type="submit" id = "inscription">S'inscrire</button><br><br> 
+    </button>
 </form>
 <p>Vous avez déjà un compte ? <a href="index.php">Connexion</a></p>
 </div>
@@ -107,9 +107,9 @@ button {
     height: 50px;
     font-family: "Anton", sans-serif;
     font-size: 15px;
-    background: transparent;
+    background: lightblue;
+    color: white;
     border: 1px solid black;
-    border-radius: 50px;
 }
 header {
         top: 0px;
@@ -157,7 +157,9 @@ a:hover {
     text-decoration: underline;
 }
 
-
-
+#captcha{
+    border-radius: 30px;
+    width: 220px;
+}
 </style>
 </html>

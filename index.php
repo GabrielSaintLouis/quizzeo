@@ -134,12 +134,14 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && !isset($_SESSION["type"])) {
         background: transparent;
         border: 1px solid black;
         border-radius: 50px;
+        background-color: lightblue;
+        color: white;
     }
     a {
         text-decoration: none;
         color: black
     }
-
+    
     a:hover {
         text-decoration: underline;
     }
