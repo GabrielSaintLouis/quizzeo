@@ -1,4 +1,25 @@
-<html>
+<?php
+session_start();
+
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    $type = $_POST['type'];
+    $email = $_POST['email'];
+    $password = $_POST['password'];
+    
+    $userData = [$type, $email, $password];
+    
+    $file = fopen('users.csv', 'a'); // Utilisation du mode 'a' pour ajouter à la fin du fichier
+    if ($file !== false) {
+        fputcsv($file, $userData);
+        fclose($file);
+        header('Location: index.php');
+        exit;
+    } else {
+        echo "Erreur lors de l'ouverture du fichier.";
+    }
+}
+?>
+<!DOCTYPE html>
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
