@@ -21,6 +21,7 @@
                 }
             } else {
                 // Si l'utilisateur n'est pas connecté, affiche le lien de connexion
+                header("Location: index.php");
                 echo '<li><a href="index.php">Connexion</a></li>';
             }
             ?>
