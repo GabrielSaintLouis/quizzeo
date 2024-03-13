@@ -8,15 +8,20 @@
             if (isset($_SESSION["type"])) {
                 if ($_SESSION['type'] === "entreprise") {
                     echo '<li><a href="dashboard_business.php">Dashboard</a></li>';
+                    echo '<li><a href="dashboard_business.php">Créer un Quizz</a></li>';
                     echo '<li><a href="logout.php">Déconnexion</a></li>';
                 } elseif ($_SESSION["type"] === "ecole") {
                     echo '<li><a href="dashboard_school.php">Dashboard</a></li>';
+                    echo '<li><a href="dashboard_school.php">Créer un Quizz</a></li>';
                     echo '<li><a href="logout.php">Déconnexion</a></li>';
                 } elseif ($_SESSION["type"] === "utilisateur") {
                     echo '<li><a href="dashboard_pnj.php">Dashboard</a></li>';
+                    echo '<li><a href="dashboard_business.php">Participer à un Quizz</a></li>';
                     echo '<li><a href="logout.php">Déconnexion</a></li>';
                 } elseif ($_SESSION["type"] === "admin") {
                     echo '<li><a href="dashboard_admin.php">Dashboard</a></li>';
+                    echo '<li><a href="dashboard_business.php">Les Utilisateurs</a></li>';
+                    echo '<li><a href="dashboard_business.php">Les Quizz</a></li>';
                     echo '<li><a href="logout.php">Déconnexion</a></li>';
                 }
             } else {
