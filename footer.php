@@ -1,5 +1,5 @@
 <!--- footer à inclure dans chaque page --->
 
 <footer>
-    <p>Copyright @ 2024 Quizzeo Tous droits réservés - Gabriel Saint-Louis</p>
+    <p>Copyright @Gabriel Saint-Louis 2024 Quizzeo - Tous droits réservés</p>
 </footer>

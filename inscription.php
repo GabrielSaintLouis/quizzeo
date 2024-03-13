@@ -49,7 +49,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         <option value="entreprise">Entreprise</option>
         <option value="ecole">Ecole</option>
         <option value="utilisateur">Utilisateur</option>
-        <option value="admin">Administrateur</option>
     </select><br><br>
     <label for="email">Email :</label><br>
     <input type="email" id="email" name="email" required><br><br>
