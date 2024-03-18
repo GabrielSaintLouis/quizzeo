@@ -37,21 +37,11 @@ if (isset($_SESSION["type"])) {
     <title>Login</title>
     <script src="https://unpkg.com/boxicons@2.1.4/dist/boxicons.js"></script>
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <script src="https://www.google.com/recaptcha/api.js" async defer></script>
 </head>
 <body>
 
-<header>
-    <nav>
-        <ul>
-            <?php
-            if (isset($_SESSION["type"])) {
-                header("Location: accueil.php");
-            }
-            ?>
-            <img src="quizzeo.png" alt="quizzeo">
-        </ul>
-    </nav>
-</header>
+<?php include "header.php"; ?>
 <div class="container">
 <h1>Page de connexion</h1>
 <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
@@ -59,7 +49,8 @@ if (isset($_SESSION["type"])) {
     <input type="email" id="email" name="email" required><br><br>
     <label for="password">Mot de passe :</label><br>
     <input type="password" id="password" name="password" required><br><br>
-    <button type="submit">Se connecter</button><br>
+    <button type="submit">Se connecter</button><br><br>
+
 </form>
 <!-- Afficher un message en cas de compte inexistant ou mot de passe incorrect -->
 <?php
@@ -73,7 +64,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && !isset($_SESSION["type"])) {
 
 
 <?php include 'footer.php'; ?>
-
+<script src="script.js"></script>
 </body>
 <style>
     @import url('https://fonts.googleapis.com/css2?family=Anton&family=Roboto:wght@100;300;400;500&display=swap');

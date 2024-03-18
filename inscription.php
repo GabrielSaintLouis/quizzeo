@@ -19,6 +19,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     }
 }
 ?>
+
 <!DOCTYPE html>
 <html lang="fr">
 <head>
@@ -27,6 +28,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <title>Login</title>
     <script src="https://unpkg.com/boxicons@2.1.4/dist/boxicons.js"></script>
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <script src="https://www.google.com/recaptcha/api.js" async defer></script>
 </head>
 <body>
 <header>
@@ -43,7 +45,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 </header>
 <div class="container">
 <h1>Page d'inscription</h1>
-<form action="inscription.php" method="post">
+<form action="inscription.php" method="post" onsubmit="validateForm()">
     <label for="type">Type: </label><br>
     <select name="type" id="option_type" required>
         <option value="entreprise">Entreprise</option>
@@ -55,15 +57,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <label for="password">Mot de passe :</label><br>
     <input type="password" id="password" name="password" required><br><br>
     <button type="submit" id = "inscription">S'inscrire</button><br><br> 
-    <button id = "captcha">
-    <label for="captcha">Êtes-vous un robot ?</label>
-    <input type="checkbox" id="checkbox" name="checkbox" required>
-    </button>
+    <div class="g-recaptcha" data-sitekey="6LfPd5wpAAAAAB6yVgL3sSJvW7nGkH8u6vsrWskv"></div>
 </form>
 <p>Vous avez déjà un compte ? <a href="index.php">Connexion</a></p>
 </div>
 <?php include 'footer.php'; ?>
-
+<script src="script.js"></script>
 </body>
 <style>
     @import url('https://fonts.googleapis.com/css2?family=Anton&family=Roboto:wght@100;300;400;500&display=swap');
