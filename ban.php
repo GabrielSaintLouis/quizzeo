@@ -6,8 +6,6 @@
     <title>Document</title>
 </head>
 <body>
-    <?php include "fonction-ban.php" ?>
-    <?php include "header.php" ?><br>
-    <?php include "footer.php" ?>
+    <h1>T'as été banni neuille</h1>
 </body>
 </html>

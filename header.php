@@ -1,5 +1,7 @@
 <!--- header à inclure dans chaque page --->
-<?php session_start();?>
+<html>
+<body>
+</body>
 <header>
     <nav>
         <ul>
@@ -7,25 +9,30 @@
             // Vérifie si une session est déjà démarrée et si l'utilisateur est connecté
             if (isset($_SESSION["type"])) {
                 if ($_SESSION['type'] === "entreprise") {
+                    echo '<li><a href="accueil.php">Accueil</a></li>';
                     echo '<li><a href="dashboard_business.php">Dashboard</a></li>';
                     echo '<li><a href="créer_quiz.php">Créer un Quizz</a></li>';
                     echo '<li><a href="logout.php">Déconnexion</a></li>';
                 } elseif ($_SESSION["type"] === "ecole") {
+                    echo '<li><a href="accueil.php">Accueil</a></li>';
                     echo '<li><a href="dashboard_school.php">Dashboard</a></li>';
                     echo '<li><a href="créer_quiz.php">Créer un Quizz</a></li>';
                     echo '<li><a href="logout.php">Déconnexion</a></li>';
                 } elseif ($_SESSION["type"] === "utilisateur") {
+                    echo '<li><a href="accueil.php">Accueil</a></li>';
                     echo '<li><a href="dashboard_pnj.php">Dashboard</a></li>';
                     echo '<li><a href="#">Participer à un Quizz</a></li>';
                     echo '<li><a href="logout.php">Déconnexion</a></li>';
                 } elseif ($_SESSION["type"] === "admin") {
+                    echo '<li><a href="accueil.php">Accueil</a></li>';
                     echo '<li><a href="créer_quizz.php">Dashboard</a></li>';
-                    echo '<li><a href="#">Les Utilisateurs</a></li>';
+                    echo '<li><a href="utilisateurs-admin.php">Les Utilisateurs</a></li>';
                     echo '<li><a href="#">Les Quizz</a></li>';
                     echo '<li><a href="logout.php">Déconnexion</a></li>';
                 }
             } else {
                 // Si l'utilisateur n'est pas connecté, affiche le lien de connexion
+                header("Location: index.php");
                 echo '<li><a href="index.php">Connexion</a></li>';
             }
             ?>
@@ -39,9 +46,13 @@
 
 header {
     top: 0px;
+    height: 25px;
     position: fixed;
     background-color: lightblue;
     width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 nav ul {
@@ -85,3 +96,6 @@ footer {
 }
 
 </style>
+<script src="script.js"></script>
+</body>
+</html>

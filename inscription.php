@@ -5,8 +5,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $type = $_POST['type'];
     $email = $_POST['email'];
     $password = $_POST['password'];
+    $activation = "activé";
     
-    $userData = [$type, $email, $password];
+    $userData = [$type, $email, $password, $activation];
     
     $file = fopen('users.csv', 'a'); // Utilisation du mode 'a' pour ajouter à la fin du fichier
     if ($file !== false) {

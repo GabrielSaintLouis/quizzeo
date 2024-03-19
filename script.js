@@ -67,3 +67,5 @@ function supprimerQuestion() {
         questionCount--;
     }
 }
+
+

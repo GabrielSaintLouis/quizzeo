@@ -5,7 +5,9 @@ session_start();
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // Récupère les valeurs du formulaire
     $email = $_POST['email'];
+    $_SESSION['email'] = $email;
     $password = $_POST['password'];
+
 
     // Vérifie si l'utilisateur existe dans le fichier CSV
     $file = fopen('users.csv', 'r');
@@ -28,7 +30,6 @@ if (isset($_SESSION["type"])) {
     exit;
 }
 ?>
-
 <!DOCTYPE html>
 <html lang="fr">
 <head>
@@ -39,17 +40,22 @@ if (isset($_SESSION["type"])) {
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
     <script src="https://www.google.com/recaptcha/api.js" async defer></script>
 </head>
+<header>
+    <nav>
+        <ul>
+            <img src="quizzeo.png" alt="quizzeo">
+        </ul>
+    </nav>
+</header>
 <body>
-
-<?php include "header.php"; ?>
 <div class="container">
 <h1>Page de connexion</h1>
-<form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
+<form action="index.php" method="post">
     <label for="email">Email :</label><br>
     <input type="email" id="email" name="email" required><br><br>
     <label for="password">Mot de passe :</label><br>
     <input type="password" id="password" name="password" required><br><br>
-    <button type="submit">Se connecter</button><br><br>
+    <button type="submit" id = "connexion">Se connecter</button><br><br>
 
 </form>
 <!-- Afficher un message en cas de compte inexistant ou mot de passe incorrect -->
@@ -69,7 +75,50 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && !isset($_SESSION["type"])) {
 <style>
     @import url('https://fonts.googleapis.com/css2?family=Anton&family=Roboto:wght@100;300;400;500&display=swap');
 
-    header {
+body {
+    font-family: "Roboto", sans-serif;
+    padding: 150px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.container {
+    border: 1px solid black;
+    width: 500px;
+    text-align: center;
+    background-color: white;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+footer {
+    bottom: 0px;
+    position: fixed;
+    width: 100%;
+    text-align: center;
+    height: 50px;
+    background-color: lightblue;
+}
+
+button {
+    background: white;
+    color: black;
+    width: 200px;
+    height: 50px;
+}
+#connexion {
+    width: 170px;
+    height: 50px;
+    font-family: "Anton", sans-serif;
+    font-size: 15px;
+    background: lightblue;
+    color: white;
+    border: 1px solid black;
+}
+header {
         top: 0px;
         position: fixed;
         background-color: lightblue;
@@ -90,51 +139,30 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && !isset($_SESSION["type"])) {
         height: 50px;
     }
 
-    body {
-        font-family: "Roboto", sans-serif;
-        padding: 150px;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-    }
 
-    .container {
-        width: 500px;
-        text-align: center;
-        border: 1px solid black;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-    }
-    footer {
-        bottom: 0px;
-        position: fixed;
-        width: 100%;
-        text-align: center;
-        height: 50px;
-        background-color: lightblue;
-    }
+label {
+    font-size: 18px;
+}
 
-    button {
-        width: 170px;
-        height: 50px;
-        font-family: "Anton", sans-serif;
-        font-size: 15px;
-        background: transparent;
-        border: 1px solid black;
-        border-radius: 50px;
-        background-color: lightblue;
-        color: white;
-    }
-    a {
-        text-decoration: none;
-        color: black
-    }
-    
-    a:hover {
-        text-decoration: underline;
-    }
+select {
+    height: 25px;
+    width: 150px;
+    text-align: center;
+    border: 1px solid black;
+}
+
+form select {
+    background: transparent ;
+}
+
+a {
+    text-decoration: none;
+    color: black
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
 </style>
 </html>

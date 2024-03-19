@@ -7,10 +7,11 @@
 <link rel="stylesheet" href="style.css">
 </head>
 <body>
-<?php include "header.php"; ?>
+<?php include "fonction-ban.php" ?>
+<?php include "header.php"; ?><br>
 <div class="container">
     <h1>Créer un nouveau quiz</h1>
-    <form action="save_quiz.php" method="post">
+    <form action="quizzA.php" method="post">
         <input type="text" name="quizName" placeholder="Nom du quiz">
         <div id="questionsContainer"></div><br> 
         <button type="button" onclick="ajouterQuestion()">Ajouter une question</button>
@@ -18,6 +19,7 @@
         <button type="submit">Valider</button>
     </form>
 </div>
+<?php include "footer.php" ?>
 <script src="script.js"></script>
 </body>
 <style>
@@ -27,12 +29,12 @@
         justify-content: center;
         align-items: center;
     }
-        .container {
-    margin: 20px auto;
-    padding: 20px;
-    max-width: 600px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
+    .container {
+        margin: 20px auto;
+        padding: 20px;
+        max-width: 1000px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
 }
 
 input, button {
