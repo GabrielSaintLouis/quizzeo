@@ -51,9 +51,9 @@ if (isset($_SESSION["type"])) {
 <div class="container">
 <h1>Page de connexion</h1>
 <form action="index.php" method="post">
-    <label for="email">Email :</label><br>
+    <label for="email">Email :</label>
     <input type="email" id="email" name="email" required><br><br>
-    <label for="password">Mot de passe :</label><br>
+    <label for="password">Mot de passe :</label>
     <input type="password" id="password" name="password" required><br><br>
     <button type="submit" id = "connexion">Se connecter</button><br><br>
 
@@ -73,27 +73,64 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && !isset($_SESSION["type"])) {
 <script src="script.js"></script>
 </body>
 <style>
-    @import url('https://fonts.googleapis.com/css2?family=Anton&family=Roboto:wght@100;300;400;500&display=swap');
+   @import url('https://fonts.googleapis.com/css2?family=Anton&family=Roboto:wght@100;300;400;500&display=swap');
 
 body {
     font-family: "Roboto", sans-serif;
-    padding: 150px;
+    margin: 0;
+    padding: 0;
     display: flex;
-    flex-direction: column;
-    align-items: center;
     justify-content: center;
+    align-items: center;
+    height: 100vh;
 }
 
 .container {
     border: 1px solid black;
     width: 500px;
+    padding: 20px; /* Ajout de padding */
     text-align: center;
     background-color: white;
+    display: flex; /* Utilisation de flexbox */
+    flex-direction: column; /* Pour aligner les éléments en colonne */
+    align-items: center;
+}
+
+form {
+    width: 100%; /* S'assurer que le formulaire occupe toute la largeur du conteneur */
+    max-width: 300px; /* Limitation de la largeur pour éviter un étirement excessif */
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: center;
 }
+
+label {
+    font-size: 18px;
+    font-weight: bold; 
+}
+
+input {
+    margin-bottom: 10px;
+    width: 100%; 
+    padding: 8px; 
+    box-sizing: border-box; 
+}
+
+button {
+    width: 200px;
+    height: 50px;
+    font-family: "Anton", sans-serif;
+    font-size: 15px;
+    background: red;
+    color: white;
+    border: 1px solid black;
+}
+
+p {
+    margin-top: 20px;
+}
+
+/* Footer */
 footer {
     bottom: 0px;
     position: fixed;
@@ -103,56 +140,26 @@ footer {
     background-color: lightblue;
 }
 
-button {
-    background: white;
-    color: black;
-    width: 200px;
-    height: 50px;
-}
-#connexion {
-    width: 170px;
-    height: 50px;
-    font-family: "Anton", sans-serif;
-    font-size: 15px;
-    background: lightblue;
-    color: white;
-    border: 1px solid black;
-}
+/* Header */
 header {
-        top: 0px;
-        position: fixed;
-        background-color: lightblue;
-        width: 100%;
-    }
-
-    nav ul {
-        list-style-type: none; 
-        margin: 0;
-        padding: 0;
-        display: flex;
-        justify-content: center; 
-        align-items: center; 
-    }
-
-    nav ul img {
-        width: auto;
-        height: 50px;
-    }
-
-
-label {
-    font-size: 18px;
+    top: 0px;
+    position: fixed;
+    background-color: lightblue;
+    width: 100%;
 }
 
-select {
-    height: 25px;
-    width: 150px;
-    text-align: center;
-    border: 1px solid black;
+nav ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
-form select {
-    background: transparent ;
+nav ul img {
+    width: auto;
+    height: 50px;
 }
 
 a {

@@ -21,7 +21,7 @@
                 } elseif ($_SESSION["type"] === "utilisateur") {
                     echo '<li><a href="accueil.php">Accueil</a></li>';
                     echo '<li><a href="dashboard_pnj.php">Dashboard</a></li>';
-                    echo '<li><a href="#">Participer à un Quizz</a></li>';
+                    echo '<li><a href="quizz.php">Participer à un Quizz</a></li>';
                     echo '<li><a href="logout.php">Déconnexion</a></li>';
                 } elseif ($_SESSION["type"] === "admin") {
                     echo '<li><a href="accueil.php">Accueil</a></li>';
@@ -53,6 +53,7 @@ header {
     display: flex;
     align-items: center;
     justify-content: center;
+    font-family: "Poppins", sans-serif;
 }
 
 nav ul {

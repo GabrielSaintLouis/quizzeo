@@ -5,9 +5,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $type = $_POST['type'];
     $email = $_POST['email'];
     $password = $_POST['password'];
-    $activation = "activé";
     
-    $userData = [$type, $email, $password, $activation];
+    $userData = [$type, $email, $password];
     
     $file = fopen('users.csv', 'a'); // Utilisation du mode 'a' pour ajouter à la fin du fichier
     if ($file !== false) {
@@ -54,9 +53,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         <option value="utilisateur">Utilisateur</option>
     </select><br><br>
     <label for="email">Email :</label><br>
-    <input type="email" id="email" name="email" required><br><br>
+    <input type="email" id="email" name="email" required maxlength="30"><br><br>
     <label for="password">Mot de passe :</label><br>
-    <input type="password" id="password" name="password" required><br><br>
+    <input type="password" id="password" name="password" required maxlength="30">
+    <span id="togglePassword" onclick="togglePasswordVisibility()">
+    <i class='bx bx-show'></i>
+    </span><br><br>
     <button type="submit" id = "inscription">S'inscrire</button><br><br> 
     <div class="g-recaptcha" data-sitekey="6LfPd5wpAAAAAB6yVgL3sSJvW7nGkH8u6vsrWskv"></div>
 </form>
@@ -64,6 +66,21 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 </div>
 <?php include 'footer.php'; ?>
 <script src="script.js"></script>
+<script>
+function togglePasswordVisibility() {
+    var passwordField = document.getElementById("password");
+    var toggleButton = document.getElementById("togglePassword");
+    
+    if (passwordField.type === "password") {
+        passwordField.type = "text";
+        toggleButton.innerHTML = '<i class="bx bx-hide"></i>';
+    } else {
+        passwordField.type = "password";
+        toggleButton.innerHTML = '<i class="bx bx-show"></i>';
+    }
+}
+</script>
+
 </body>
 <style>
     @import url('https://fonts.googleapis.com/css2?family=Anton&family=Roboto:wght@100;300;400;500&display=swap');
@@ -107,7 +124,7 @@ button {
     height: 50px;
     font-family: "Anton", sans-serif;
     font-size: 15px;
-    background: lightblue;
+    background: red;
     color: white;
     border: 1px solid black;
 }
@@ -135,11 +152,28 @@ header {
 
 label {
     font-size: 18px;
+    font-weight: bold;
 }
 
+form {
+    width: 100%; /* S'assurer que le formulaire occupe toute la largeur du conteneur */
+    max-width: 300px; /* Limitation de la largeur pour éviter un étirement excessif */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+input {
+    margin-bottom: 4px;
+    width: 100%; 
+    padding: 8px; 
+    box-sizing: border-box; 
+    text-align: center;
+}
 select {
-    height: 25px;
-    width: 150px;
+    margin-bottom: 10px;
+    width: 100%;
+    padding: 8px;
     text-align: center;
     border: 1px solid black;
 }
@@ -157,9 +191,5 @@ a:hover {
     text-decoration: underline;
 }
 
-#captcha{
-    border-radius: 30px;
-    width: 220px;
-}
 </style>
 </html>
