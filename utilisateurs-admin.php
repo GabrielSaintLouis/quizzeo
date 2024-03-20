@@ -1,14 +1,15 @@
 <?php
-    // vérifie si l'utilisateur a les permissions
-    session_start();
-    if ($_SESSION["type"] != "admin") {
-        header("Location: accueil.php");
-    }
+// vérifie si l'utilisateur a les permissions
+session_start();
+if ($_SESSION["type"] != "admin") {
+    header("Location: accueil.php");
+}
 ?>
 <!DOCTYPE html>
 <html>
 <head>
     <?php include "header.php" ?><br>
+    <?php include "style.php" ?><br>
     <title>Liste des utilisateurs</title>
     <style>
         table {
@@ -21,6 +22,9 @@
         th {
             background-color: #f2f2f2;
         }
+        form {
+            display: inline; /* Pour afficher les boutons dans la même ligne */
+        }
     </style>
 </head>
 <body>
@@ -31,7 +35,9 @@
     <tr>
         <th>Type</th>
         <th>Mail</th>
-        <th>Mot de passe</th>   
+        <th>Mot de passe</th>
+        <th>État</th> <!-- Nouvelle colonne pour l'état -->
+        <th>Action</th> <!-- Nouvelle colonne pour les boutons -->
     </tr>
     
     <?php
@@ -53,40 +59,40 @@
     $file = fopen('users.csv', 'r');
     if ($file !== false) {
         // Parcourir chaque ligne du fichier
-while (($data = fgetcsv($file, 1000, ",")) !== false) {
-    echo "<tr>";
-    // Afficher chaque champ dans une cellule
-    foreach ($data as $value) {
-        // Vérifier si la valeur est définie avant de l'afficher
-        if(isset($value)){
-            echo "<td>" . htmlspecialchars($value) . "</td>";
-        } else {
-            echo "<td></td>";
+        while (($data = fgetcsv($file, 1000, ",")) !== false) {
+            echo "<tr>";
+            // Afficher chaque champ dans une cellule
+            foreach ($data as $value) {
+                // Vérifier si la valeur est définie avant de l'afficher
+                if(isset($value)){
+                    echo "<td>" . htmlspecialchars($value) . "</td>";
+                } else {
+                    echo "<td></td>";
+                }
+            }
+            // Vérifier si le tableau $data contient au moins deux éléments
+            if(count($data) >= 2){
+                // Afficher l'état (Activé/Désactivé)
+                echo "<td>";
+                if (!in_array($data[1], getUserEmailsFromBanList())) {
+                    echo "Activé";
+                } else {
+                    echo "Désactivé";
+                }
+                echo "</td>";
+                // Boutons Désactiver ou Réactiver
+                echo "<td>";
+                if (!in_array($data[1], getUserEmailsFromBanList())) {
+                    echo "<form method='post'><input type='hidden' name='email' value='" . $data[1] . "'><input type='submit' name='disable' value='Désactiver'></form>";
+                } else {
+                    echo "<form method='post'><input type='hidden' name='email' value='" . $data[1] . "'><input type='submit' name='enable' value='Réactiver'></form>";
+                }
+                echo "</td>";
+            } else {
+                echo "<td></td><td></td>"; // Ajouter des cellules vides
+            }
+            echo "</tr>";
         }
-    }
-    // Vérifier si le tableau $data contient au moins deux éléments
-    if(count($data) >= 2){
-        // Afficher l'état (Activé/Désactivé)
-        echo "<td>";
-        if (!in_array($data[1], getUserEmailsFromBanList())) {
-            echo "Activé";
-        } else {
-            echo "Désactivé";
-        }
-        echo "</td>";
-        // Bouton Désactiver ou Réactiver
-        echo "<td>";
-        if (!in_array($data[1], getUserEmailsFromBanList())) {
-            echo "<form method='post'><input type='hidden' name='email' value='" . $data[1] . "'><input type='submit' name='disable' value='Désactiver'></form>";
-        } else {
-            echo "<form method='post'><input type='hidden' name='email' value='" . $data[1] . "'><input type='submit' name='enable' value='Réactiver'></form>";
-        }
-        echo "</td>";
-    } else {
-        echo "<td></td><td></td>"; // Ajouter des cellules vides
-    }
-    echo "</tr>";
-}
         fclose($file);
     }
 

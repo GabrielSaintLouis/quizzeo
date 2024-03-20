@@ -8,6 +8,8 @@
 <body>
     <?php include "fonction-ban.php" ?>
     <?php include "header.php" ?><br>
+    <?php include "style.php" ?><br>
+    <h1>Neuille </h1>
     <?php include "footer.php" ?>
 </body>
 </html>

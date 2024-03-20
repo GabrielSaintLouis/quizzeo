@@ -62,7 +62,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <button type="submit" id = "inscription">S'inscrire</button><br><br> 
     <div class="g-recaptcha" data-sitekey="6LfPd5wpAAAAAB6yVgL3sSJvW7nGkH8u6vsrWskv"></div>
 </form>
-<p>Vous avez déjà un compte ? <a href="index.php">Connexion</a></p>
+<p id="connexion">Vous avez déjà un compte ? <a href="index.php">Connexion</a></p>
+<div id="delai"></div>
 </div>
 <?php include 'footer.php'; ?>
 <script src="script.js"></script>
@@ -84,7 +85,28 @@ function togglePasswordVisibility() {
 </body>
 <style>
     @import url('https://fonts.googleapis.com/css2?family=Anton&family=Roboto:wght@100;300;400;500&display=swap');
+/* keyframes  */
 
+/* Définition des @keyframes pour l'animation de secousse */
+@keyframes bounce {
+        0%, 20%,50%,80%,100% {
+                transform: translateY(0);
+            }
+        40% {
+            transform: translateY(-30px);
+            }
+            60% {
+                transform: translateY(-15px);
+            }
+        }
+        
+/* Application de l'animation de secousse à l'élément */
+#connexion {
+    animation: bounce 0.5s ease infinite ;
+    animation-duration:1.5s  ;
+}
+
+/* body */
 body {
     font-family: "Roboto", sans-serif;
     padding: 150px;
@@ -92,31 +114,34 @@ body {
     flex-direction: column;
     align-items: center;
     justify-content: center;
+    background-image: url(fond.gif);
 }
 
 .container {
     border: 1px solid black;
-    width: 500px;
+    width: 600px;
     text-align: center;
     background-color: white;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
+    border-radius:  20px;
+    background-color: rgba(255, 255, 255, 0.8);
 }
 footer {
     bottom: 0px;
     position: fixed;
     width: 100%;
-    text-align: center;
     height: 50px;
-    background-color: lightblue;
+    background-color: rgba(255, 255, 255, 0.8);
+    color: black;
 }
 
 button {
     background: white;
     color: black;
-    width: 200px;
+    width: 170px;
     height: 50px;
 }
 #inscription {
@@ -131,7 +156,7 @@ button {
 header {
         top: 0px;
         position: fixed;
-        background-color: lightblue;
+        background-color: rgba(255, 255, 255, 0.8);
         width: 100%;
     }
 
@@ -184,7 +209,7 @@ form select {
 
 a {
     text-decoration: none;
-    color: black
+    color: black;
 }
 
 a:hover {

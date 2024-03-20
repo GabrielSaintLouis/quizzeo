@@ -5,19 +5,26 @@ session_start();
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // Récupère les valeurs du formulaire
     $email = $_POST['email'];
-    $_SESSION['email'] = $email;
     $password = $_POST['password'];
-
-
+    $_SESSION['email'] = $email;
+ 
     // Vérifie si l'utilisateur existe dans le fichier CSV
     $file = fopen('users.csv', 'r');
     if ($file !== false) {
         while (($userData = fgetcsv($file)) !== false) {
-            if ($userData[1] == $email && $userData[2] == $password) {
-                // L'utilisateur existe, démarre la session et redirige vers le dashboard approprié
-                $_SESSION['type'] = $userData[0];
-                header('Location: accueil.php');
-                exit;
+            // Vérifie si le tableau $userData contient au moins deux éléments
+            if (isset($userData[1]) && isset($userData[2])) {
+                if ($userData[1] == $email && $userData[2] == $password) {
+                    // L'utilisateur existe, démarre la session et redirige vers le dashboard approprié
+                    $_SESSION['type'] = $userData[0];
+                    $_SESSION['email'] = $email; // Stocke également l'email dans la session
+                    fclose($file);
+                    header('Location: accueil.php');
+                    exit;
+                }
+            } else {
+                // Gérer le cas où les données du fichier CSV ne sont pas correctes
+                echo "Les données du fichier CSV sont incorrectes.";
             }
         }
         fclose($file);
@@ -25,6 +32,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         echo "Erreur lors de l'ouverture du fichier.";
     }
 }
+
+// Redirige vers le dashboard si l'utilisateur est déjà connecté
 if (isset($_SESSION["type"])) {
     header('Location: accueil.php');
     exit;
@@ -49,127 +58,152 @@ if (isset($_SESSION["type"])) {
 </header>
 <body>
 <div class="container">
-<h1>Page de connexion</h1>
-<form action="index.php" method="post">
-    <label for="email">Email :</label>
-    <input type="email" id="email" name="email" required><br><br>
-    <label for="password">Mot de passe :</label>
-    <input type="password" id="password" name="password" required><br><br>
-    <button type="submit" id = "connexion">Se connecter</button><br><br>
+    <h1>Page de connexion</h1>
+    <form action="index.php" method="post">
+        <label for="email">Email :</label>
+        <input type="email" id="email" name="email" required><br><br>
+        <label for="password">Mot de passe :</label>
+        <input type="password" id="password" name="password" required><br><br>
+        <button type="submit" id="connexion-bouton">Se connecter</button><br><br>
+    </form>
+    <!-- Afficher un message en cas de compte inexistant ou mot de passe incorrect -->
+    <?php
+    if ($_SERVER["REQUEST_METHOD"] == "POST" && !isset($_SESSION["type"])) {
+        echo '<p style="color: red;">Mot de passe incorrect ou utilisateur inexistant.</p>';
+    }
+    ?>
 
-</form>
-<!-- Afficher un message en cas de compte inexistant ou mot de passe incorrect -->
-<?php
-if ($_SERVER["REQUEST_METHOD"] == "POST" && !isset($_SESSION["type"])) {
-    echo '<p style="color: red;">Mot de passe incorrect ou utilisateur inexistant.</p>';
-}
-?>
-
-<p>Vous n'avez pas de compte ? <a href="inscription.php">Créer un compte</a></p><br>
+    <p id="connexion">Vous n'avez pas de compte ? <a href="inscription.php">Créer un compte</a></p><br>
+    <a href="mdp_oublié.php">Mot de passe oublié ?</a>
 </div>
-
 
 <?php include 'footer.php'; ?>
 <script src="script.js"></script>
 </body>
 <style>
-   @import url('https://fonts.googleapis.com/css2?family=Anton&family=Roboto:wght@100;300;400;500&display=swap');
+    @import url('https://fonts.googleapis.com/css2?family=Anton&family=Roboto:wght@100;300;400;500&display=swap');
 
-body {
-    font-family: "Roboto", sans-serif;
-    margin: 0;
-    padding: 0;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-}
+    /* keyframes  */
 
-.container {
-    border: 1px solid black;
-    width: 500px;
-    padding: 20px; /* Ajout de padding */
-    text-align: center;
-    background-color: white;
-    display: flex; /* Utilisation de flexbox */
-    flex-direction: column; /* Pour aligner les éléments en colonne */
-    align-items: center;
-}
+    /* Définition des @keyframes pour l'animation de secousse */
+    @keyframes bounce {
+        0%, 20%, 50%, 80%, 100% {
+            transform: translateY(0);
+        }
 
-form {
-    width: 100%; /* S'assurer que le formulaire occupe toute la largeur du conteneur */
-    max-width: 300px; /* Limitation de la largeur pour éviter un étirement excessif */
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-}
+        40% {
+            transform: translateY(-30px);
+        }
 
-label {
-    font-size: 18px;
-    font-weight: bold; 
-}
+        60% {
+            transform: translateY(-15px);
+        }
+    }
 
-input {
-    margin-bottom: 10px;
-    width: 100%; 
-    padding: 8px; 
-    box-sizing: border-box; 
-}
+    /* Application de l'animation de secousse à l'élément */
+    #connexion {
+        animation: bounce 0.5s ease infinite;
+        animation-duration: 1.5s;
+    }
 
-button {
-    width: 200px;
-    height: 50px;
-    font-family: "Anton", sans-serif;
-    font-size: 15px;
-    background: red;
-    color: white;
-    border: 1px solid black;
-}
+    body {
+        font-family: "Roboto", sans-serif;
+        margin: 0;
+        padding: 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        background-image: url("fond.gif");
+    }
 
-p {
-    margin-top: 20px;
-}
+    .container {
+        border: 1px solid black;
+        width: 500px;
+        padding: 20px; 
+        text-align: center;
+        background-color: white;
+        display: flex; 
+        flex-direction: column; 
+        align-items: center;
+        border-radius: 20px;
+        background-color: rgba(255, 255, 255, 0.8);
+    }
 
-/* Footer */
-footer {
-    bottom: 0px;
-    position: fixed;
-    width: 100%;
-    text-align: center;
-    height: 50px;
-    background-color: lightblue;
-}
+    form {
+        width: 100%; /* S'assurer que le formulaire occupe toute la largeur du conteneur */
+        max-width: 300px; /* Limitation de la largeur pour éviter un étirement excessif */
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
 
-/* Header */
-header {
-    top: 0px;
-    position: fixed;
-    background-color: lightblue;
-    width: 100%;
-}
+    label {
+        font-size: 18px;
+        font-weight: bold;
+    }
 
-nav ul {
-    list-style-type: none;
-    margin: 0;
-    padding: 0;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
+    input {
+        margin-bottom: 10px;
+        width: 100%;
+        padding: 8px;
+        box-sizing: border-box;
+    }
 
-nav ul img {
-    width: auto;
-    height: 50px;
-}
+    button {
+        width: 200px;
+        height: 50px;
+        font-family: "Anton", sans-serif;
+        font-size: 15px;
+        background: red;
+        color: white;
+        border: 1px solid black;
+    }
 
-a {
-    text-decoration: none;
-    color: black
-}
+    p {
+        margin-top: 20px;
+    }
 
-a:hover {
-    text-decoration: underline;
-}
+    /* Footer */
+    footer {
+        bottom: 0px;
+        position: fixed;
+        width: 100%;
+        text-align: center;
+        height: 50px;
+        background-color: rgba(255, 255, 255, 0.8);
+    }
+
+    /* Header */
+    header {
+        top: 0px;
+        position: fixed;
+        background-color: rgba(255, 255, 255, 0.8);
+        width: 100%;
+    }
+
+    nav ul {
+        list-style-type: none;
+        margin: 0;
+        padding: 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    nav ul img {
+        width: auto;
+        height: 50px;
+    }
+
+    a {
+        text-decoration: none;
+        color: black
+    }
+
+    a:hover {
+        text-decoration: underline;
+    }
 
 </style>
 </html>

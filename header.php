@@ -11,12 +11,12 @@
                 if ($_SESSION['type'] === "entreprise") {
                     echo '<li><a href="accueil.php">Accueil</a></li>';
                     echo '<li><a href="dashboard_business.php">Dashboard</a></li>';
-                    echo '<li><a href="créer_quiz.php">Créer un Quizz</a></li>';
+                    echo '<li><a href="créer_quizz.php">Créer un Quizz</a></li>';
                     echo '<li><a href="logout.php">Déconnexion</a></li>';
                 } elseif ($_SESSION["type"] === "ecole") {
                     echo '<li><a href="accueil.php">Accueil</a></li>';
                     echo '<li><a href="dashboard_school.php">Dashboard</a></li>';
-                    echo '<li><a href="créer_quiz.php">Créer un Quizz</a></li>';
+                    echo '<li><a href="quizz.php">Créer un Quizz</a></li>';
                     echo '<li><a href="logout.php">Déconnexion</a></li>';
                 } elseif ($_SESSION["type"] === "utilisateur") {
                     echo '<li><a href="accueil.php">Accueil</a></li>';
@@ -48,7 +48,8 @@ header {
     top: 0px;
     height: 25px;
     position: fixed;
-    background-color: lightblue;
+    background-color: rgba(255, 255, 255, 0.8);
+    color: white;
     width: 100%;
     display: flex;
     align-items: center;

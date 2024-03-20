@@ -1,7 +1,7 @@
 <!--- footer à inclure dans chaque page --->
 
 <footer>
-    <p>Copyright @Gabriel Saint-Louis 2024 Quizzeo - <a href="politique.php">Tous droits réservés</a></p>
+    <p>Copyright @Gabriel Saint-Louis 2024 Quizzeo - <a href="politique.php" id="politique">Tous droits réservés</a></p>
 </footer>
 
 
@@ -10,14 +10,19 @@
         text-decoration: none;
         color: black;
     }
+
     a:hover {
         text-decoration: underline;
     }   
 
     footer {
-        background: lightblue;
+        background-color: rgba(255, 255, 255, 0.8);
         display: flex;
         align-items: center;
         justify-content: center;
+        color: black;
+        bottom: 0px;
+        position: fixed;
+        width: 100%;
     }
 </style>
