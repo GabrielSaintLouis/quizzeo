@@ -11,24 +11,9 @@ if ($_SESSION["type"] != "admin") {
     <?php include "header.php" ?><br>
     <?php include "style.php" ?><br>
     <title>Liste des utilisateurs</title>
-    <style>
-        table {
-            border-collapse: collapse;
-        }
-        th, td {
-            padding: 8px;
-            text-align: left;
-        }
-        th {
-            background-color: #f2f2f2;
-        }
-        form {
-            display: inline; /* Pour afficher les boutons dans la même ligne */
-        }
-    </style>
 </head>
 <body>
-
+<div class="container">
 <h2>Liste des utilisateurs</h2>
 
 <table>
@@ -36,6 +21,7 @@ if ($_SESSION["type"] != "admin") {
         <th>Type</th>
         <th>Mail</th>
         <th>Mot de passe</th>
+        <th>Pseudo</th>
         <th>État</th> <!-- Nouvelle colonne pour l'état -->
         <th>Action</th> <!-- Nouvelle colonne pour les boutons -->
     </tr>
@@ -145,6 +131,112 @@ if ($_SESSION["type"] != "admin") {
     ?>
 
 </table>
-
+</div>
+<?php include "footer.php"?>
 </body>
+
+<style>
+        @import url('https://fonts.googleapis.com/css2?family=Anton&family=Roboto:wght@100;300;400;500&display=swap');
+/* keyframes  */
+
+/* Définition des @keyframes pour l'animation de secousse */
+@keyframes bounce {
+        0%, 20%,50%,80%,100% {
+                transform: translateY(0);
+            }
+        40% {
+            transform: translateY(-30px);
+            }
+            60% {
+                transform: translateY(-15px);
+            }
+        }
+        
+/* Application de l'animation de secousse à l'élément */
+
+table {
+            border-collapse: collapse;
+        }
+        th, td {
+            padding: 8px;
+            text-align: left;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+        form {
+            display: inline; /* Pour afficher les boutons dans la même ligne */
+        }
+
+/* body */
+body {
+    font-family: "Roboto", sans-serif;
+    padding: 150px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background-image: url(fond.gif);
+}
+
+.container {
+    border: 1px solid black;
+    width: auto;
+    text-align: center;
+    background-color: white;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    border-radius:  20px;
+    background-color: rgba(255, 255, 255, 0.8);
+}
+
+button {
+    background-color: rgba(255, 255, 255, 0.8);
+    color: black;
+}
+
+label {
+    font-size: 18px;
+    font-weight: bold;
+}
+
+form {
+    width: 100%; /* S'assurer que le formulaire occupe toute la largeur du conteneur */
+    max-width: 300px; /* Limitation de la largeur pour éviter un étirement excessif */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+input {
+    margin-bottom: 4px;
+    width: 100%; 
+    padding: 8px; 
+    box-sizing: border-box; 
+    text-align: center;
+}
+select {
+    margin-bottom: 10px;
+    width: 100%;
+    padding: 8px;
+    text-align: center;
+    border: 1px solid black;
+}
+
+form select {
+    background: transparent ;
+}
+
+a {
+    text-decoration: none;
+    color: black;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+</style>
 </html>

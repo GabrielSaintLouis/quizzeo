@@ -9,7 +9,4 @@
     justify-content: center;
     background-image: url(fond.gif);
 }
-
-    }
-       
 </style>

@@ -1,2 +1,7 @@
-type,mail,mdp,
-admin,gabi@gmail.com,v,
+type,mail,mdp,pseudo  
+admin,gabi@gmail.com,a,Admin
+utilisateur,vanessa@neuille.fr,bonjour,Vanessa
+utilisateur,user@gmail.com,a,LAS
+entreprise,company@gmail.com,a,BA
+utilisateur,gabriel.saintlouis10@neuille.f,neuille,NeuillePrimeFRR
+utilisateur,talmo@gmail.com,a,talmo

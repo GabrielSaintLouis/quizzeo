@@ -5,8 +5,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $type = $_POST['type'];
     $email = $_POST['email'];
     $password = $_POST['password'];
+    $pseudo = $_POST['pseudo'];
     
-    $userData = [$type, $email, $password];
+    $userData = [$type, $email, $password, $pseudo];
     
     $file = fopen('users.csv', 'a'); // Utilisation du mode 'a' pour ajouter à la fin du fichier
     if ($file !== false) {
@@ -52,6 +53,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         <option value="ecole">Ecole</option>
         <option value="utilisateur">Utilisateur</option>
     </select><br><br>
+    <label for="pseudo">Pseudonyme :</label><br>
+    <input type="text" id="pseudo" name="pseudo" required maxlength="30"><br><br>
     <label for="email">Email :</label><br>
     <input type="email" id="email" name="email" required maxlength="30"><br><br>
     <label for="password">Mot de passe :</label><br>

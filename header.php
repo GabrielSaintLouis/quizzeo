@@ -16,7 +16,7 @@
                 } elseif ($_SESSION["type"] === "ecole") {
                     echo '<li><a href="accueil.php">Accueil</a></li>';
                     echo '<li><a href="dashboard_school.php">Dashboard</a></li>';
-                    echo '<li><a href="quizz.php">Créer un Quizz</a></li>';
+                    echo '<li><a href="créer_quizz.php">Créer un Quizz</a></li>';
                     echo '<li><a href="logout.php">Déconnexion</a></li>';
                 } elseif ($_SESSION["type"] === "utilisateur") {
                     echo '<li><a href="accueil.php">Accueil</a></li>';
@@ -25,7 +25,6 @@
                     echo '<li><a href="logout.php">Déconnexion</a></li>';
                 } elseif ($_SESSION["type"] === "admin") {
                     echo '<li><a href="accueil.php">Accueil</a></li>';
-                    echo '<li><a href="créer_quizz.php">Dashboard</a></li>';
                     echo '<li><a href="utilisateurs-admin.php">Les Utilisateurs</a></li>';
                     echo '<li><a href="#">Les Quizz</a></li>';
                     echo '<li><a href="logout.php">Déconnexion</a></li>';

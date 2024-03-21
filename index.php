@@ -18,6 +18,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                     // L'utilisateur existe, démarre la session et redirige vers le dashboard approprié
                     $_SESSION['type'] = $userData[0];
                     $_SESSION['email'] = $email; // Stocke également l'email dans la session
+                    $_SESSION['pseudo'] = $userData[3];
                     fclose($file);
                     header('Location: accueil.php');
                     exit;

@@ -12,7 +12,7 @@
     </nav>
 </header>
 <hr>
-<div>
+<div id="carte">
 <h1>Politique de Confidentialité de Quizzeo.fr</h1>
 
 <h3>Dernière mise à jour : 22/03/24</h3>
@@ -61,17 +61,17 @@ Quizzeo.fr utilise des cookies pour améliorer l'expérience utilisateur, fourni
 
 Si vous avez des questions ou des préoccupations concernant cette politique de confidentialité, ou si vous souhaitez exercer vos droits en matière de protection des données, veuillez nous contacter à l'adresse suivante : Rue Claude Tillier.<br>
 </div>
-<hr>    
-<?php include "footer.php"?>
 </body>
 <style>
     body {
         font-family: "Poppins", sans-serif;
+        background-image: url("fond.gif");
     }
+
     header {
-        background: lightblue;
+        background-color: rgba(255,255,255,0.8);
         width: 100%;
-        height: auto;
+        height: 100%;
         top: 0px;
         font-size: 25px;
         display: flex;
@@ -85,6 +85,12 @@ Si vous avez des questions ou des préoccupations concernant cette politique de 
 
     a:hover {
         text-decoration: underline;
+    }
+
+    #carte {
+        width: 100%;
+        background-color: white;
+        text-align: justify;
     }
 </style>
 </html>

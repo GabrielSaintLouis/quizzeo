@@ -8,5 +8,3 @@ function validateForm() {
     }
     return true;
 }
-
-
