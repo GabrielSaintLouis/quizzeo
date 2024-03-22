@@ -16,8 +16,7 @@ if ($file !== false) {
     echo "<th>Type</th>";
     echo "<th>Email</th>";
     echo "<th>Lien</th>";
-    echo "<th>Statut</th>";
-    echo "<th>Action</th>";
+    echo "<th>Actions</th>"; // Nouvelle colonne pour les actions
     echo "</tr>";
     
     // Parcourir chaque ligne du fichier CSV
@@ -42,20 +41,8 @@ if ($file !== false) {
                 echo "<td>$type</td>";
                 echo "<td>$email</td>";
                 echo "<td><a href='$lien'>Lien vers le quiz</a></td>";
-                
-                // Vérifier si le quiz est activé ou désactivé
-                $status = $_SESSION[$email] ?? "Activé";
-                echo "<td>$status</td>";
-
-                // Bouton pour activer ou désactiver le quiz
-                echo "<td>";
-                if ($status === "Activé") {
-                    echo "<form method='post'><input type='hidden' name='email' value='$email'><input type='submit' class='disable-btn' name='disable' value='Désactiver'></form>";
-                } else {
-                    echo "<form method='post'><input type='hidden' name='email' value='$email'><input type='submit' class='enable-btn' name='enable' value='Réactiver'></form>";
-                }
-                echo "</td>";
-                
+                // Ajout du bouton de copie du lien
+                echo "<td><button onclick='copyToClipboard(\"$lien\")'>Copier le lien</button></td>";
                 echo "</tr>";
                 $count++; // Incrémenter le compteur
             }
@@ -70,22 +57,63 @@ if ($file !== false) {
 } else {
     echo "Erreur lors de l'ouverture du fichier.";
 }
-
-// Traitement des formulaires
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    // Traitement de la désactivation
-    if (isset($_POST['disable'])) {
-        $email = $_POST['email'];
-        $_SESSION[$email] = "Désactivé";
-        // Actualiser la page pour afficher les changements
-        echo "<meta http-equiv='refresh' content='0'>";
-    }
-    // Traitement de la réactivation
-    if (isset($_POST['enable'])) {
-        $email = $_POST['email'];
-        $_SESSION[$email] = "Activé";
-        // Actualiser la page pour afficher les changements
-        echo "<meta http-equiv='refresh' content='0'>";
-    }
-}
 ?>
+
+<!-- JavaScript pour copier le lien -->
+<script>
+function copyToClipboard(text) {
+    var input = document.createElement('textarea');
+    input.innerHTML = text;
+    document.body.appendChild(input);
+    input.select();
+    document.execCommand('copy');
+    document.body.removeChild(input);
+    alert("Lien copié avec succès : " + text);
+}
+</script>
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <style>
+    .quiz-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.quiz-table th,
+.quiz-table td {
+    padding: 8px;
+    border: 1px solid #ddd;
+    text-align: left;
+}
+
+.quiz-table th {
+    background-color: #f2f2f2;
+}
+
+.quiz-table tr:nth-child(even) {
+    background-color: #f9f9f9;
+}
+
+.quiz-table tr:hover {
+    background-color: #f2f2f2;
+}
+
+.quiz-table a {
+    text-decoration: none;
+    color: #007bff;
+}
+
+.quiz-table a:hover {
+    text-decoration: underline;
+}
+
+    </style>
+</body>
+</html>

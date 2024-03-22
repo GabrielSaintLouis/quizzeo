@@ -1,5 +1,4 @@
 <?php   
-        session_start();
         $fichier = fopen("ban.csv","r");
         while (($ligne = fgetcsv($fichier)) !== false) {
             foreach ($ligne as $valeur) {

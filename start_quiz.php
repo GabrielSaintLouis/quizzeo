@@ -5,17 +5,16 @@ session_start();
 if ($_SESSION['type'] != "utilisateur") {
     header("Location: accueil.php");
 }
+
 function ind_debut($nb, $t) {
-    return $nb * ($t + 3) ;
+    return $nb * ($t + 3);
 }
 
 function ind_fin($nb, $t) {
-    return $t + 2 + $nb*($t + 3);
+    return $t + 2 + $nb * ($t + 3);
 }
 
 if (isset($_GET['name'])) {
-
-
     $name_quiz = $_GET['name'];
     $file = 'quiz.csv';
     $quiz_found = false;
@@ -108,44 +107,58 @@ if (isset($_GET['name'])) {
     </style>
 </head>
 <body>
-    
+    <?php include "header.php" ?>
+    <?php include "footer.php" ?>
+    <?php include "style.php" ?>
 
     <script>
-       
-        const duree = <?php echo $duree * 60; ?>;    // Imprimer la valeur de la variable duree dans le script 
-        
-        const endTime = Date.now() + duree * 1000;   // Date de fin du minuteur en  millisecondes
+      <script>
+    const duree = <?php echo $duree * 60; ?>; // Imprimer la valeur de la variable duree dans le script
+    const endTime = Date.now() + duree * 1000; // Date de fin du minuteur en millisecondes
 
-        var startButton = document.getElementById('startTimer');
-        var stopButton = document.querySelector('.submitBtn');
+    var stopButton = document.querySelector('.submitBtn');
 
-        // Fonction du minuteur 
-        function updateMinuteur() {
-            const currentTime = Date.now();
-            const remainingTime = Math.max(0, endTime - currentTime);
+    // Fonction du minuteur
+    function updateMinuteur() {
+        const currentTime = Date.now();
+        const remainingTime = Math.max(0, endTime - currentTime);
 
-            const minutes = Math.floor(remainingTime / 60000);
-            const seconds = Math.floor((remainingTime % 60000) / 1000); 
-            document.getElementById("minuteur").innerHTML = `Temps restant : ${minutes} minutes ${seconds} secondes`;
+        const minutes = Math.floor(remainingTime / 60000);
+        const seconds = Math.floor((remainingTime % 60000) / 1000);
+        document.getElementById("minuteur").innerHTML = `Temps restant : ${minutes} minutes ${seconds} secondes`;
 
-            if (seconds === 0 && minutes === 0) { 
-                document.getElementById("minuteur").innerHTML = "Temps écoulé !";
-                clearInterval(interval);  // Arrête le minuteur lorsque le temps est écoulé
-                window.location.href = this.action;     // Redirige vers la page resultat.php après le temps imparti
-            }
+        if (seconds === 0 && minutes === 0) {
+            document.getElementById("minuteur").innerHTML = "Temps écoulé !";
+            clearInterval(interval); // Arrête le minuteur lorsque le temps est écoulé
+            window.location.href = "accueil.php"; // Redirige vers la page d'accueil
         }
+    }
 
-        function startTimer() {
-            const interval = setInterval(updateMinuteur, 1000);  // Affiche le résultat du minuteur toutes les secondes 
-        }
+    const interval = setInterval(updateMinuteur, 1000); // Affiche le résultat du minuteur toutes les secondes
 
+    stopButton.addEventListener('click', function() {
+        window.location.href = this.action; // Redirige vers la page resultat.php
 
-            startTimer();
+        // Enregistrement du nombre de réponses dans un fichier CSV
+        const nbReponsesFile = "nb_reponses.csv";
+        const formData = new FormData();
+        formData.append('nb_reponses', 1); // 1 représente une réponse supplémentaire
 
+        fetch(nbReponsesFile, {
+                method: 'POST',
+                body: formData
+            })
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Erreur lors de l\'enregistrement du nombre de réponses.');
+                }
+                return response.text();
+            })
+            .then(data => console.log(data))
+            .catch(error => console.error(error));
+    });
+</script>
 
-        stopButton.addEventListener('click', function() {
-            window.location.href = this.action;   // Redirige vers la page resultat.php
-        });
     </script>
 </body>
 </html>

@@ -76,7 +76,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <label for="email">Email :</label><br>
     <input type="email" id="email" name="email" required maxlength="30"><br><br>
     <label for="password">Mot de passe :</label><br>
-    <input type="password" id="password" name="password" required maxlength="30" minlength="7">
+    <input type="password" id="password" name="password" required maxlength="30" minlength="7" pattern="^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#$%^&*]).{7,}$"title="Le mot de passe doit contenir au moins 7 caractères, dont au moins une lettre majuscule, une lettre minuscule, un chiffre et un caractère spécial parmi !@#$%^&*">
     <span id="togglePassword" onclick="togglePasswordVisibility()">
     <i class='bx bx-show'></i>
     </span><br><br>
@@ -108,7 +108,7 @@ function togglePasswordVisibility() {
     @import url('https://fonts.googleapis.com/css2?family=Anton&family=Roboto:wght@100;300;400;500&display=swap');
 /* keyframes  */
 
-/* Définition des @keyframes pour l'animation de secousse */
+/* Animation de secousse */
 @keyframes bounce {
         0%, 20%,50%,80%,100% {
                 transform: translateY(0);
@@ -121,7 +121,6 @@ function togglePasswordVisibility() {
             }
         }
         
-/* Application de l'animation de secousse à l'élément */
 #connexion {
     animation: bounce 0.5s ease infinite ;
     animation-duration:1.5s  ;

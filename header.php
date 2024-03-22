@@ -22,6 +22,7 @@
                 } elseif ($_SESSION["type"] === "utilisateur") {
                     echo '<li><a href="accueil.php">Accueil</a></li>';
                     echo '<li><a href="dashboard_pnj.php">Dashboard</a></li>';
+                    echo '<li><a href="chercher.php">Jouer</a></li> ';
                     echo '<li><a href="logout.php">Déconnexion</a></li>';
                 } elseif ($_SESSION["type"] === "admin") {
                     echo '<li><a href="accueil.php">Accueil</a></li>';
@@ -45,7 +46,7 @@
 
 header {
     top: 0px;
-    height: 25px;
+    height: 35px;
     position: fixed;
     background-color: rgba(255, 255, 255, 0.8);
     color: white;
@@ -53,7 +54,9 @@ header {
     display: flex;
     align-items: center;
     justify-content: center;
+    text-align: center;
     font-family: "Arial", sans-serif;
+    font-size: 17px;
 }
 
 nav ul {
@@ -77,6 +80,8 @@ nav ul li a {
 
 nav ul li a:hover {
     text-decoration: underline;
+    color: orange;
+    transition: 0.1s;
 }
 
 body {

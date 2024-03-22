@@ -46,20 +46,19 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 });
 </script>
-<!-- boitedialogue.css -->
 <style>
-  /* Style pour le contenu de la boîte de dialogue */
+  /* boîte de dialogue */
   .content {
     background-color: #fefefe;
-    margin: 15% auto; /* Centre verticalement et horizontalement */
+    margin: 15% auto; 
     padding: 20px;
     border: 1px solid #888;
-    width: 80%;
+    width: 500px;
     border-radius: 5px;
     box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
   }
 
-  /* Style pour les champs de saisie */
+  /* champs du form */
   .content input[type="number"],
   .content input[type="submit"] {
     width: 100%;
@@ -70,9 +69,9 @@ document.addEventListener('DOMContentLoaded', function() {
     border-radius: 4px;
   }
 
-  /* Style pour le bouton "Soumettre" */
+  /* style du button submit */
   .content input[type="submit"] {
-    background-color: #4CAF50;
+    background-color: orange;
     color: white;
     border: none;
     cursor: pointer;

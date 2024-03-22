@@ -18,29 +18,8 @@
             background-color: #f2f2f2;
         }
 
-        .quiz-table tr:nth-child(even) {
-            background-color: #f2f2f2;
-        }
-
-        .quiz-table tr:hover {
-            background-color: #ddd;
-        }
-
-        .disable-btn, .enable-btn {
-            background-color: #f44336;
-            border: none;
-            color: white;
-            padding: 8px 12px;
-            text-align: center;
-            text-decoration: none;
-            display: inline-block;
-            font-size: 14px;
-            cursor: pointer;
-            border-radius: 4px;
-        }
-
-        .enable-btn {
-            background-color: #4CAF50;
+        .quiz-table td {
+            background-color: white;
         }
     </style>
 </head>
@@ -63,8 +42,6 @@ if ($file !== false) {
     echo "<th>Type</th>";
     echo "<th>Email</th>";
     echo "<th>Lien</th>";
-    echo "<th>Statut</th>";
-    echo "<th>Action</th>";
     echo "</tr>";
     
     // Parcourir chaque ligne du fichier CSV
@@ -86,19 +63,7 @@ if ($file !== false) {
             echo "<td>$type</td>";
             echo "<td>$email</td>";
             echo "<td><a href='$lien'>Lien vers le quiz</a></td>";
-            
-            // Vérifier si le quiz est activé ou désactivé
-            $status = $_SESSION[$email] ?? "Activé";
-            echo "<td>$status</td>";
 
-            // Bouton pour activer ou désactiver le quiz
-            echo "<td>";
-            if ($status === "Activé") {
-                echo "<form method='post'><input type='hidden' name='email' value='$email'><input type='submit' class='disable-btn' name='disable' value='Désactiver'></form>";
-            } else {
-                echo "<form method='post'><input type='hidden' name='email' value='$email'><input type='submit' class='enable-btn' name='enable' value='Réactiver'></form>";
-            }
-            echo "</td>";
             
             echo "</tr>";
         }
@@ -113,23 +78,6 @@ if ($file !== false) {
     echo "Erreur lors de l'ouverture du fichier.";
 }
 
-// Traitement des formulaires
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    // Traitement de la désactivation
-    if (isset($_POST['disable'])) {
-        $email = $_POST['email'];
-        $_SESSION[$email] = "Désactivé";
-        // Actualiser la page pour afficher les changements
-        echo "<meta http-equiv='refresh' content='0'>";
-    }
-    // Traitement de la réactivation
-    if (isset($_POST['enable'])) {
-        $email = $_POST['email'];
-        $_SESSION[$email] = "Activé";
-        // Actualiser la page pour afficher les changements
-        echo "<meta http-equiv='refresh' content='0'>";
-    }
-}
 ?>
 </body>
 </html>
