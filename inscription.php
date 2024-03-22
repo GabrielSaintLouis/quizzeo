@@ -7,19 +7,37 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $password = $_POST['password'];
     $pseudo = $_POST['pseudo'];
     
-    $userData = [$type, $email, $password, $pseudo];
-    
-    $file = fopen('users.csv', 'a'); // Utilisation du mode 'a' pour ajouter à la fin du fichier
+    // Vérification si l'email est déjà utilisé
+    $file = fopen('users.csv', 'r');
+    $emailExists = false;
     if ($file !== false) {
-        fputcsv($file, $userData);
+        while (($data = fgetcsv($file, 1000, ",")) !== false) {
+            if ($data[1] === $email) {
+                $emailExists = true;
+                break;
+            }
+        }
         fclose($file);
-        header('Location: index.php');
-        exit;
+    }
+    
+    if ($emailExists) {
+        echo "<script>alert('Adresse mail déjà utilisée')</script>";
     } else {
-        echo "Erreur lors de l'ouverture du fichier.";
+        $userData = [$type, $email, $password, $pseudo];
+        
+        $file = fopen('users.csv', 'a'); // Utilisation du mode 'a' pour ajouter à la fin du fichier
+        if ($file !== false) {
+            fputcsv($file, $userData);
+            fclose($file);
+            header('Location: accueil.php');
+            exit;
+        } else {
+            echo "Erreur lors de l'ouverture du fichier.";
+        }
     }
 }
 ?>
+
 
 <!DOCTYPE html>
 <html lang="fr">
@@ -58,7 +76,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <label for="email">Email :</label><br>
     <input type="email" id="email" name="email" required maxlength="30"><br><br>
     <label for="password">Mot de passe :</label><br>
-    <input type="password" id="password" name="password" required maxlength="30">
+    <input type="password" id="password" name="password" required maxlength="30" minlength="7">
     <span id="togglePassword" onclick="togglePasswordVisibility()">
     <i class='bx bx-show'></i>
     </span><br><br>

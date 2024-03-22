@@ -154,19 +154,30 @@ if ($_SESSION["type"] != "admin") {
         
 /* Application de l'animation de secousse à l'élément */
 
+/* Styles pour la table */
 table {
-            border-collapse: collapse;
-        }
-        th, td {
-            padding: 8px;
-            text-align: left;
-        }
-        th {
-            background-color: #f2f2f2;
-        }
-        form {
-            display: inline; /* Pour afficher les boutons dans la même ligne */
-        }
+    width: 100%;
+    border-collapse: collapse;
+}
+
+th, td {
+    border: 1px solid #dddddd;
+    padding: 8px;
+    text-align: left;
+}
+
+th {
+    background-color: #f2f2f2;
+}
+
+tr:nth-child(even) {
+    background-color: #f2f2f2;
+}
+
+tr:hover {
+    background-color: #ddd;
+}
+
 
 /* body */
 body {
@@ -216,6 +227,16 @@ input {
     padding: 8px; 
     box-sizing: border-box; 
     text-align: center;
+            background-color: #f44336;
+            border: none;
+            color: white;
+            padding: 8px 12px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 14px;
+            cursor: pointer;
+            border-radius: 4px;
 }
 select {
     margin-bottom: 10px;
@@ -237,6 +258,8 @@ a {
 a:hover {
     text-decoration: underline;
 }
+
+
 
 </style>
 </html>

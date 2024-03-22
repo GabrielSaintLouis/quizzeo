@@ -7,6 +7,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $email = $_POST['email'];
     $password = $_POST['password'];
     $_SESSION['email'] = $email;
+
  
     // Vérifie si l'utilisateur existe dans le fichier CSV
     $file = fopen('users.csv', 'r');

@@ -1,3 +1,4 @@
+
 <!--- header à inclure dans chaque page --->
 <html>
 <body>
@@ -10,23 +11,22 @@
             if (isset($_SESSION["type"])) {
                 if ($_SESSION['type'] === "entreprise") {
                     echo '<li><a href="accueil.php">Accueil</a></li>';
-                    echo '<li><a href="dashboard_business.php">Dashboard</a></li>';
-                    echo '<li><a href="créer_quizz.php">Créer un Quizz</a></li>';
+                    echo '<li><a href="dashboard_school.php">Dashboard</a></li>';
+                    echo '<li><a href="boite.php">Créer un Quizz</a></li>';
                     echo '<li><a href="logout.php">Déconnexion</a></li>';
                 } elseif ($_SESSION["type"] === "ecole") {
                     echo '<li><a href="accueil.php">Accueil</a></li>';
                     echo '<li><a href="dashboard_school.php">Dashboard</a></li>';
-                    echo '<li><a href="créer_quizz.php">Créer un Quizz</a></li>';
+                    echo '<li><a href="boite.php">Créer un Quizz</a></li>';
                     echo '<li><a href="logout.php">Déconnexion</a></li>';
                 } elseif ($_SESSION["type"] === "utilisateur") {
                     echo '<li><a href="accueil.php">Accueil</a></li>';
                     echo '<li><a href="dashboard_pnj.php">Dashboard</a></li>';
-                    echo '<li><a href="quizz.php">Participer à un Quizz</a></li>';
                     echo '<li><a href="logout.php">Déconnexion</a></li>';
                 } elseif ($_SESSION["type"] === "admin") {
                     echo '<li><a href="accueil.php">Accueil</a></li>';
                     echo '<li><a href="utilisateurs-admin.php">Les Utilisateurs</a></li>';
-                    echo '<li><a href="#">Les Quizz</a></li>';
+                    echo '<li><a href="liste-quiz.php">Les Quizz</a></li>';
                     echo '<li><a href="logout.php">Déconnexion</a></li>';
                 }
             } else {
@@ -53,7 +53,7 @@ header {
     display: flex;
     align-items: center;
     justify-content: center;
-    font-family: "Poppins", sans-serif;
+    font-family: "Arial", sans-serif;
 }
 
 nav ul {
