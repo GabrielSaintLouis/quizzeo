@@ -15,7 +15,6 @@
 <div id="boite_d" class="boite_d">
   <div class="content">
     <span class="close">&times;</span>
-    <!--Ici les informations de la boîte dialogue seront recupérées et envoyées vers la page de création -->
     <h2>Informations du quiz</h2>
     <form id="myForm" action="quiz.php" method="post">
       <input type="number"  name="nbq" placeholder = "Entrer le nombre de questions " required><br/>

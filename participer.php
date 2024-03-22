@@ -24,7 +24,7 @@
             $lien = $_POST['lien'];
             // Redirection vers le lien saisi
             header("Location: $lien");
-            exit; // Assurez-vous de terminer le script après la redirection
+            exit; // 
         } else {
             // Affichage d'un message d'erreur si le champ est vide
             echo "<p>Veuillez entrer un lien.</p>";
