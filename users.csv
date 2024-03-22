@@ -2,4 +2,7 @@ type,mail,mdp,pseudo
 admin,gabi@gmail.com,a,Admin
 entreprise,gabriel.saintlouis12@gmail.com,Gabgab95!,talmo
 ecole,g.saintlouis@ecole-ipssi.net,Ipssi75!,ipssi
-utilisateur,user@gmail.com,Bonjourc'estmoi!12,"Utilisateur de manlade"
+utilisateur,user@gmail.com,Bonjourc'estmoi!12,Utilisateur de manlade
+entreprise,efekan.kocak@gmail.com,Rolala77!,efekan
+utilisateur,user2@gmail.com,$2y$10$ejRYm.4s/Xu6duFb4CcVBuSY.xFKq/WTTfhpfuTf8AwczBAbvym.O,joelprime
+utilisateur,test@test.com,$2y$10$0Kwe2rjljfApA614zZfrI.m3Fz0BigT./6p9pgjCUJNMoDBfMlO/q,test

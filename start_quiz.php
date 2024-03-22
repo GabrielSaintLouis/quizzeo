@@ -113,28 +113,6 @@ if (isset($_GET['name'])) {
 
     <script>
       <script>
-    const duree = <?php echo $duree * 60; ?>; // Imprimer la valeur de la variable duree dans le script
-    const endTime = Date.now() + duree * 1000; // Date de fin du minuteur en millisecondes
-
-    var stopButton = document.querySelector('.submitBtn');
-
-    // Fonction du minuteur
-    function updateMinuteur() {
-        const currentTime = Date.now();
-        const remainingTime = Math.max(0, endTime - currentTime);
-
-        const minutes = Math.floor(remainingTime / 60000);
-        const seconds = Math.floor((remainingTime % 60000) / 1000);
-        document.getElementById("minuteur").innerHTML = `Temps restant : ${minutes} minutes ${seconds} secondes`;
-
-        if (seconds === 0 && minutes === 0) {
-            document.getElementById("minuteur").innerHTML = "Temps écoulé !";
-            clearInterval(interval); // Arrête le minuteur lorsque le temps est écoulé
-            window.location.href = "accueil.php"; // Redirige vers la page d'accueil
-        }
-    }
-
-    const interval = setInterval(updateMinuteur, 1000); // Affiche le résultat du minuteur toutes les secondes
 
     stopButton.addEventListener('click', function() {
         window.location.href = this.action; // Redirige vers la page resultat.php
