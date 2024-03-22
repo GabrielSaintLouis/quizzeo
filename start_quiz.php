@@ -45,7 +45,7 @@ if (isset($_GET['name'])) {
 
         $reponses_quiz = fopen("answer_".$name_quiz.".csv", "w");  //  Ouvre un fichier pour stocker les réponses 
 
-        echo  "<form action='resultat.php?name=".$name_quiz."&nbq=".$nbq."&role_creator=".$role_creator."' method='post' >";
+        echo  "<form action='resultats.php?name=".$name_quiz."&nbq=".$nbq."&role_creator=".$role_creator."' method='post' >";
         
         echo "<h1> Intitulé du quiz : ".$info_quiz[0]."</h1>" ;
         echo "<div class='minuteur' id='minuteur'></div>";

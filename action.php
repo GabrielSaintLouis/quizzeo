@@ -1,64 +1,62 @@
 <?php
 session_start();
 
-$type= $_SESSION['type'] ;
-$mail = $_SESSION['email'] ;
+$type = $_SESSION['type'];
+$mail = $_SESSION['email'];
 
-
-# Stockage  des quiz 
-
-
+# Stockage des quiz 
 if (isset($_POST['Create_quiz'])) {
-
-
     $file = fopen('quiz.csv', 'a+');
 
-    if(isset($_GET[ 'nbq'])  && isset($_GET['np'])) {
-        $nbq=$_GET['nbq'];
-        $np=$_GET['np'] ;
-    
-        $nom = $_POST['name_qcm'];
-        $lien = "http://localhost/Quizzeo/start_quiz.php?name=".$nom;
-        $contenu = array();
-        $quiz = array();
-        $time = $_POST['duree'];
-        $info_quiz = [$nom,$type,$mail,$lien,$nbq,$np,$time,"En cours","Activé"];
-            
+    // Récupération des données du formulaire
+    $nbq = $_POST['nbq'];
+    $np = $_POST['np'];
+    $nom = $_POST['name_qcm'];
+    $_SESSION['nom-quiz'] =
+    $lien = "http://localhost/Quizzeo/start_quiz.php?name=" . $nom;
+    $time = $_POST['duree'];
+
+    // Informations sur le quiz
+    $info_quiz = [$nom, $type, $mail, $lien, $nbq, $np, $time, "En cours", "Activé"];
+    $quiz = [];
+    $contenu = [];
+
+    // Boucle pour récupérer les questions, réponses et points
+    for ($i = 1; $i <= $nbq; $i++) {
+        $info_ques = [];
+        $propositions = [];
+
+        $question = $_POST["q$i"];
+
+        for ($j = 1; $j <= $np; $j++) {
+            $prop = $_POST["pq${i}_$j"];
+            array_push($propositions, $prop);
+        }
+
+        // Ajout de la réponse et des points
+        array_push($propositions, $_POST["rq$i"]);
+        array_push($propositions, $_POST["point$i"]);
         
-            for ($i = 1; $i <= $nbq; $i++) {
-                $info_ques = array();  
-                $propositions = array();
+        // Ajout de la question et des propositions à $info_ques
+        array_push($info_ques, $question);
+        foreach ($propositions as $prop) {
+            array_push($info_ques, $prop);
+        }
 
-                $question = $_POST["q".$i]; // Récupère la question depuis le formulaire 
-
-                for ($j = 1; $j <= $np; $j++) {
-                    $prop = $_POST["pq".$i."_".$j]; // Récupère les propositions depuis le formulaire
-                    array_push($propositions, $prop);
-                }
-
-                array_push($propositions, $_POST["rq".$i]);  // Récupère la réponse depuis le formulaire
-                array_push($propositions, $_POST["point".$i]);  // Récupère la valeur de la question depuis le formulaire
-                array_push($info_ques, $question);
-
-                foreach ($propositions as $prop) {
-                    array_push($info_ques, $prop);
-                }
-
-                array_push($contenu, implode(", ",$info_ques));    // Transforme le tableau $info_ques en chaîne pour être inséré dans le CSV
-            }
-
-            array_push( $quiz,implode(", ",$info_quiz ));    // Transforme le tableau $info_quiz en chaîne pour être inséré dans le CSV
-            array_push( $quiz,implode(", ",$contenu ));      // Transforme le tableau $contenu en chaîne pour être inséré dans le CSV
-            fputcsv($file,$quiz);                            // Insère le tableau dans le fichier csv
-            fclose($file); // Fermez le fichier 
-        
+        // Ajout de $info_ques à $contenu
+        array_push($contenu, implode(", ", $info_ques));
     }
 
+    // Ajout des informations sur le quiz et son contenu à $quiz
+    array_push($quiz, implode(", ", $info_quiz));
+    array_push($quiz, implode(", ", $contenu));
 
+    // Écriture dans le fichier CSV
+    fputcsv($file, $quiz);
+    fclose($file); 
 
-    //Création du fichier  CSV pour stocker l'historique des participants au quiz 
-    $nomFichier = "Player_".$nom.".csv";
-
+    // Création du fichier CSV pour stocker l'historique des participants
+    $nomFichier = "Player_" . $nom . ".csv";
     if (!file_exists($nomFichier)) {
         touch($nomFichier);
         echo "Le fichier a été créé avec succès !";
@@ -66,10 +64,7 @@ if (isset($_POST['Create_quiz'])) {
         echo "Le fichier existe déjà.";
     }
 
-
-    header('location: accueil.php');   // Redirige vers la page d'accueil une fois le  quizz créé
-
+    // Redirection vers la page d'accueil
+    header('location: accueil.php');
 }
-
-
 ?>

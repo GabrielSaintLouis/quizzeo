@@ -1,27 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard</title>
+</head>
+<body>
+
 <?php
 session_start();
+// Inclure l'en-tête
+include "header.php";
+include "footer.php";
+include "style.php";
 
- // Vérifier si l'utilisateur est un joueur
- if ($_SESSION['type'] == 'utilisateur') {
-    // Ouvrir le fichier CSV contenant les résultats de l'utilisateur
-    $results_file = fopen('Player_' . $name_quiz . '.csv', 'r');
+// Obtenez l'e-mail de l'utilisateur connecté
+$user_email = $_SESSION['email'];
 
-    if ($results_file !== false) {
-        // Lire les lignes du fichier CSV et afficher les résultats de l'utilisateur
-        echo "<h1>Résultats de " . $user . "</h1>";
-        echo "<ul>";
-        while (($data = fgetcsv($results_file, 1000, ',')) !== false) {
-            echo "<li>" . $data[0] . ": " . $data[1] . "</li>";
-        }
-        echo "</ul>";
+// Chemin vers le fichier CSV du score de l'utilisateur
+$user_score_file = "scores_$user_email.csv";
 
-        // Fermer le fichier CSV
-        fclose($results_file);
-    } else {
-        echo "Erreur: Impossible d'ouvrir le fichier des résultats.";
+// Vérifie si le fichier CSV du score de l'utilisateur existe
+if (file_exists($user_score_file)) {
+    // Lire les scores de l'utilisateur à partir du fichier CSV
+    $user_scores = array_map('str_getcsv', file($user_score_file));
+
+    // Affichage des scores de l'utilisateur
+    echo "<h2>Vos scores</h2>";
+    echo "<table>";
+    echo "<tr><th>Quiz</th><th>Score</th></tr>";
+    foreach ($user_scores as $user_score) {
+        echo "<tr><td>$user_score[0]</td><td>$user_score[1]</td></tr>";
     }
+    echo "</table>";
 } else {
-    echo "Erreur: Vous n'avez pas l'autorisation d'accéder à cette page.";
+    echo "<p>Aucun score trouvé pour cet utilisateur.</p>";
 }
 ?>
 
+</body>
+</html>
